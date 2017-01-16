@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-cq",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Babel preset used by chuangqiTean",
   "license": "MIT",
   "main": "lib/index.js",
