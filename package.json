@@ -1,14 +1,11 @@
 {
   "name": "babel-preset-cq",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "Babel preset used by chuangqiTean",
   "license": "MIT",
-  "files": [
-    "index.js"
-  ],
+  "main": "lib/index.js",
   "scripts": {
-    "build": "babel ./src/index.js -d ./lib",
-    "test": "babel ./test/index.js --no-babelrc --out-file ./test/index.babel.js --extends=./test/.babelrc"
+    "build": "babel ./src/index.js --out-file ./lib/index.js"
   },
   "dependencies": {
     "babel-plugin-transform-class-properties": "6.11.5",
@@ -18,10 +15,5 @@
     "babel-preset-env": "0.0.4",
     "babel-preset-latest": "6.14.0",
     "babel-runtime": "6.11.6"
-  },
-  "devDependencies": {
-    "babel-preset-cq": "^0.0.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-0": "^6.16.0"
   }
 }

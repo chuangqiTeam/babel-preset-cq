@@ -16,41 +16,29 @@ import transformRegenerator from 'babel-plugin-transform-regenerator';
 // Polyfills the runtime needed for async/await and generators
 import transformRuntime from 'babel-plugin-transform-runtime';
 
-const plugins = [
-
-    [
-        require.resolve('babel-plugin-transform-regenerator'), {
-            // Async functions are converted to generators by babel-preset-latest
-            async: false
-        },
-    ],
-
-    [
-        require.resolve('babel-plugin-transform-runtime'), {
-            helpers: false,
-            polyfill: false,
-            regenerator: true,
-            // Resolve the Babel runtime relative to the config.
-            moduleName: path.dirname(require.resolve('babel-runtime/package')),
-        },
-    ],
-];
-
+import path from 'path';
 
 export default function(context, opts = {target: 'web'}) {
     const options = opts;
 
     return {
         presets: [
-            options.target === 'web' && [presetLatest, {modules: false}],
+            options.target === 'web' && [presetLatest, {es2015: {modules: false}}],
             // ES features necessary for user's Node version
             options.target === 'node' && [presetEnv, {targets: {node: parseFloat(process.versions.node)}}],
-        ],
+        ].filter(Boolean),
         plugins: [
             transformClassProperties,
             transformObjectRestSpread,
-            transformRegenerator,
-            transformRuntime,
+            // // Async functions are converted to generators by babel-preset-latest
+            [transformRegenerator, {async: false}],
+            [transformRuntime, {
+                helpers: false,
+                polyfill: false,
+                regenerator: true,
+                // Resolve the Babel runtime relative to the config.
+                moduleName: path.dirname(require.resolve('babel-runtime/package')),
+            }],
         ],
     };
 };
