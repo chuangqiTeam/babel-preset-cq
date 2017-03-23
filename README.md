@@ -17,7 +17,7 @@
 
 // web环境
 {
-    presets: [["cq", {"target": "web"}]]
+    presets: [["cq", {"target": "web", modules: false, env: 'development'}]]
 }
 
 // node环境
